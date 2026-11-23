@@ -70,7 +70,7 @@ class ClioMainMenu extends MusicBeatState {
 		if (selected > items.length - 1)
 			selected = 0;
 
-		FunkinSound.playOnce(Paths.sound('ui/clio/menu/scroll-menu').toFlxSoundAsset());
+		FunkinSound.playOnce(Paths.sound('ui/clio/menus/sounds/scroll-menu').toFlxSoundAsset());
 
 		for (itemText in itemsTexts) {
 			itemText.color = (selected == itemText.ID) ? 0xFFFFFF00 : 0xFFFFFFFF;
@@ -94,6 +94,6 @@ class ClioMainMenu extends MusicBeatState {
 	function select() {
 		trace(items[selected]);
 
-		FunkinSound.playOnce(Paths.sound('ui/clio/menu/confirm-menu').toFlxSoundAsset());
+		FunkinSound.playOnce(Paths.sound('ui/clio/menus/sounds/confirm-menu').toFlxSoundAsset());
 	}
 }
