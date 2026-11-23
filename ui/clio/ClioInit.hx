@@ -11,7 +11,9 @@ class ClioInit extends Module {
 	}
 
 	public function onCreate() {
-		InitState.customTitleState = function() return new ClioMainMenu();
-		InitState.customTitleStateAssetsQuery = function(type) return ClioMainMenu.queryAssets(type);
+		var CMM = new ClioMainMenu();
+
+		InitState.customTitleState = function() return CMM;
+		InitState.customTitleStateAssetsQuery = function(type) return CMM.queryAssets(type);
 	}
 }
