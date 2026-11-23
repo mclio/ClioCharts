@@ -14,6 +14,10 @@ class ClioMainMenu extends ClioTextMenuState {
 		addItem('options', null);
 		addItem('credits', null);
 
+		#if FEATURE_DEBUG_MENU
+		funkin.util.plugins.SidePanelPlugin.requestPanel('clio', true);
+		#end
+
 		super.create();
 	}
 }
