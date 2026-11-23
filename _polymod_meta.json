@@ -1,0 +1,18 @@
+{
+  "id": "cliocharts",
+  "title": "Clio Charts",
+  "description": "Chart Library Mod",
+  "contributors": [
+    {
+      "name": "Clio",
+      "role": "Programmer & Charter"
+    },
+    {
+      "name": "laffinstalk",
+      "role": "Remixer"
+    }
+  ],
+  "api_version": "0.9.0",
+  "mod_version": "0.1.0",
+  "license": "Apache-2.0"
+}

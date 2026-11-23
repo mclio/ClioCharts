@@ -1,0 +1,14 @@
+import funkin.ui.story.Level;
+
+class ClioChartsLevel extends Level
+{
+  public function new()
+  {
+    super('charts');
+  }
+
+  override function getSongDisplayNames(difficultyId:String):Array<String>
+  {
+    return ["WAY炜WARD ROMANCE"];
+  }
+}

@@ -1,0 +1,38 @@
+{
+ "version": "2.2.8",
+ "songName": "WAY炜WARD ROMANCE ft. Feng Yi",
+ "artist": "Flavor Foley + laffingstalk",
+ "charter": "Clio",
+ "offsets": { },
+ "playData": {
+  "difficulties": [
+   "hard"
+  ],
+  "characters": {
+   "player": "bf",
+   "girlfriend": "gf",
+   "opponent": "dad",
+   "opponentVocals": [],
+   "playerVocals": []
+  },
+  "stage": "mainStageErect",
+  "noteStyle": "funkin",
+  "ratings": {
+   "easy": 0,
+   "normal": 9,
+   "hard": 10
+  },
+  "album": "expansion2",
+  "stickerPack": "standard-bf",
+  "previewEnd": 0.151861438621919
+ },
+ "generatedBy": "Friday Night Funkin' - v0.8.7",
+ "timeChanges": [
+  {
+   "t": 0,
+   "b": 0,
+   "bpm": 192.553,
+   "bt": [4, 4, 4, 4]
+  }
+ ]
+}
