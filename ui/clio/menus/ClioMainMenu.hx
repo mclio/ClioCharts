@@ -1,9 +1,42 @@
 package ui.clio.menus;
 
 import funkin.ui.MusicBeatState;
+import funkin.assets.Assets;
+import funkin.assets.Paths;
+import flixel.text.FlxText;
+import flixel.group.FlxSpriteContainer;
+import flixel.FlxG;
 
 class ClioMainMenu extends MusicBeatState {
+	static var font:String = 'ui/clio/Ac437_CompaqThin_8x16';
+
 	public static function queryAssets(type:AssetType):Array<AssetPath> {
-        return [];
+		var assets = [];
+
+		switch (type) {
+			case FONT:
+				assets.appendUnique([Paths.font(font),]);
+
+			default:
+		}
+
+		return assets;
+	}
+
+	var items = ['charts', 'options', 'credits',];
+	var itemsTexts:FlxSpriteContainer;
+
+	public function create() {
+		super.create();
+
+		add(itemsTexts = new FlxSpriteContainer());
+
+		final tsize = 32;
+		for (i => item in items) {
+			var itemText = new FlxText(0, 20 + (i * (tsize * 2)), camera.width, item.toUpperCase(), tsize);
+			itemsTexts.add(itemText);
+
+			itemText.setFormat(Paths.font(font), tsize, 0xFFFFFFFF, 'center');
+		}
 	}
 }
