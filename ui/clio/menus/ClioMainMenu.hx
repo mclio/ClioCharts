@@ -6,14 +6,15 @@ import funkin.assets.Paths;
 import flixel.text.FlxText;
 import flixel.group.FlxSpriteContainer;
 import flixel.FlxG;
+import flixel.FlxObject;
 
 class ClioMainMenu extends MusicBeatState {
-	static var font:String = Paths.font('ui/clio/Ac437_CompaqThin_8x16');
+	static var font:String = 'ui/clio/Ac437_CompaqThin_8x16';
 
 	public static function queryAssets(type:AssetType):Array<AssetPath> {
 		switch (type) {
 			case 'FONT':
-				return [ClioMainMenu.font,];
+				return [Paths.font(font),];
 
 			default:
 		}
@@ -24,9 +25,14 @@ class ClioMainMenu extends MusicBeatState {
 	var items = ['charts', 'options', 'credits',];
 	var itemsTexts:FlxSpriteContainer;
 
+	var camFollow:FlxObject;
+
+	var selected = 0;
+
 	public function create() {
 		super.create();
 
+		add(camFollow = new FlxObject(FlxG.width / 2, 0, 1, 1));
 		add(itemsTexts = new FlxSpriteContainer());
 
 		final tsize = 32;
@@ -34,7 +40,49 @@ class ClioMainMenu extends MusicBeatState {
 			var itemText = new FlxText(0, 20 + (i * (tsize * 2)), camera.width, item.toUpperCase(), tsize);
 			itemsTexts.add(itemText);
 
-			itemText.setFormat(ClioMainMenu.font, tsize, 0xFFFFFFFF, 'center');
+			itemText.setFormat(Paths.font(font), tsize, 0xFFFFFFFF, 'center');
+			itemText.ID = i;
 		}
+
+		resetCamStuff();
+		move(0);
+	}
+
+	function resetCamStuff(snap:Bool = true):Void {
+		FlxG.camera.follow(camFollow, null, 0.04);
+
+		if (snap)
+			FlxG.camera.snapToTarget();
+	}
+
+	function move(change = 0) {
+		selected += change;
+
+		if (selected < 0)
+			selected = items.length - 1;
+		if (selected > items.length - 1)
+			selected = 0;
+
+		for (itemText in itemsTexts) {
+			itemText.color = (selected == itemText.ID) ? 0xFFFFFF00 : 0xFFFFFFFF;
+
+			if (selected == itemText.ID)
+				camFollow.y = itemText.y;
+		}
+	}
+
+	override function update(elapsed) {
+		super.update(elapsed);
+
+		if (controls.UI_UP_P)
+			move(-1);
+		if (controls.UI_DOWN_P)
+			move(1);
+		if (controls.ACCEPT_P)
+			select();
+	}
+
+	function select() {
+		trace(items[selected]);
 	}
 }
