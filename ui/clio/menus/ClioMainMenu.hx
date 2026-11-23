@@ -11,16 +11,14 @@ class ClioMainMenu extends MusicBeatState {
 	static var font:String = 'ui/clio/Ac437_CompaqThin_8x16';
 
 	public static function queryAssets(type:AssetType):Array<AssetPath> {
-		var assets = [];
-
 		switch (type) {
-			case FONT:
-				assets.appendUnique([Paths.font(font),]);
+			case 'FONT':
+				return [Paths.font(font),];
 
 			default:
 		}
 
-		return assets;
+		return [];
 	}
 
 	var items = ['charts', 'options', 'credits',];
