@@ -58,6 +58,10 @@ class ClioTextMenuState extends MusicBeatState {
 
 		resetCamStuff();
 		move(0);
+
+		#if FEATURE_DEBUG_MENU
+		funkin.util.plugins.SidePanelPlugin.requestPanel('clio', true);
+		#end
 	}
 
 	function resetCamStuff(snap:Bool = true):Void {

@@ -11,13 +11,13 @@ class ClioMainMenu extends ClioTextMenuState {
 		}
 
 		addItem('charts', null);
-		addItem('options', null);
+		addItem('options', onOptions);
 		addItem('credits', null);
-
-		#if FEATURE_DEBUG_MENU
-		funkin.util.plugins.SidePanelPlugin.requestPanel('clio', true);
-		#end
 
 		super.create();
 	}
+
+	function onCharts() {}
+	function onOptions() {}
+	function onCredits() {}
 }
