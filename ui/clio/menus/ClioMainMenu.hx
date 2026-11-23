@@ -8,12 +8,12 @@ import flixel.group.FlxSpriteContainer;
 import flixel.FlxG;
 
 class ClioMainMenu extends MusicBeatState {
-	static var font:String = 'ui/clio/Ac437_CompaqThin_8x16';
+	static var font:String = Paths.font('ui/clio/Ac437_CompaqThin_8x16');
 
 	public static function queryAssets(type:AssetType):Array<AssetPath> {
 		switch (type) {
 			case 'FONT':
-				return [Paths.font(font),];
+				return [ClioMainMenu.font,];
 
 			default:
 		}
@@ -34,7 +34,7 @@ class ClioMainMenu extends MusicBeatState {
 			var itemText = new FlxText(0, 20 + (i * (tsize * 2)), camera.width, item.toUpperCase(), tsize);
 			itemsTexts.add(itemText);
 
-			itemText.setFormat(Paths.font(font), tsize, 0xFFFFFFFF, 'center');
+			itemText.setFormat(ClioMainMenu.font, tsize, 0xFFFFFFFF, 'center');
 		}
 	}
 }
