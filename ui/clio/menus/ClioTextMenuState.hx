@@ -34,6 +34,7 @@ class ClioTextMenuState extends MusicBeatState {
 	}
 
 	var items:Array<String> = [];
+	var itemsOnSelect:Array<Void->Void> = [];
 	var itemsTexts:FlxSpriteContainer;
 
 	var camFollow:FlxObject;
@@ -96,8 +97,16 @@ class ClioTextMenuState extends MusicBeatState {
 	}
 
 	function select() {
-		trace(items[selected]);
+		var selection = itemsOnSelect[selected];
 
 		FunkinSound.playOnce(Paths.sound(SOUND_SELECTMENU).toFlxSoundAsset());
+
+		if (selection != null)
+			selection();
+	}
+
+	function addItem(item:String, onSelect:Void->Void) {
+		items.push(item);
+		itemsOnSelect.push(onSelect);
 	}
 }
