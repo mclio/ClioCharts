@@ -2,6 +2,7 @@ package ui.clio;
 
 import funkin.modding.module.Module;
 import funkin.InitState;
+import funkin.data.quickpanel.PanelRegistry;
 import ui.clio.menus.ClioMainMenu;
 
 class ClioInit extends Module {

@@ -3,6 +3,7 @@ package ui.clio.menus;
 import funkin.ui.MusicBeatState;
 import funkin.assets.Assets;
 import funkin.assets.Paths;
+import funkin.audio.FunkinSound;
 import flixel.text.FlxText;
 import flixel.group.FlxSpriteContainer;
 import flixel.FlxG;
@@ -46,6 +47,12 @@ class ClioMainMenu extends MusicBeatState {
 
 		resetCamStuff();
 		move(0);
+
+		if (FlxG.sound.music != null) {
+			FlxG.sound.music.stop();
+			FlxG.sound.music.destroy();
+			FlxG.sound.music = null;
+		}
 	}
 
 	function resetCamStuff(snap:Bool = true):Void {
@@ -62,6 +69,8 @@ class ClioMainMenu extends MusicBeatState {
 			selected = items.length - 1;
 		if (selected > items.length - 1)
 			selected = 0;
+
+		FunkinSound.playOnce(Paths.sound('ui/clio/menu/scroll-menu').toFlxSoundAsset());
 
 		for (itemText in itemsTexts) {
 			itemText.color = (selected == itemText.ID) ? 0xFFFFFF00 : 0xFFFFFFFF;
@@ -84,5 +93,7 @@ class ClioMainMenu extends MusicBeatState {
 
 	function select() {
 		trace(items[selected]);
+
+		FunkinSound.playOnce(Paths.sound('ui/clio/menu/confirm-menu').toFlxSoundAsset());
 	}
 }
