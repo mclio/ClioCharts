@@ -1,6 +1,7 @@
 package ui.clio.menus;
 
 import flixel.FlxG;
+import funkin.ui.transition.Transition.TransitionType;
 
 class ClioMainMenu extends ClioTextMenuState {
 	public function create() {
@@ -10,14 +11,22 @@ class ClioMainMenu extends ClioTextMenuState {
 			FlxG.sound.music = null;
 		}
 
-		addItem('charts', null);
+		addItem('charts', onCharts);
 		addItem('options', onOptions);
-		addItem('credits', null);
+		addItem('credits', onCredits);
 
 		super.create();
 	}
 
 	function onCharts() {}
+
 	function onOptions() {}
-	function onCredits() {}
+
+	function onCredits() {
+		var CCM = new ClioCreditsMenu();
+
+		ClioUtil.snapTransition(CCM, {
+			assetQuery: CCM.queryAssets,
+		});
+	}
 }

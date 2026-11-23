@@ -8,6 +8,10 @@ import flixel.group.FlxSpriteContainer;
 import flixel.FlxG;
 import flixel.FlxObject;
 import funkin.ui.MusicBeatState;
+import funkin.util.Constants;
+import funkin.graphics.FunkinCamera;
+
+using StringTools;
 
 class ClioTextMenuState extends MusicBeatState {
 	final FONT_Ac437_CompaqThin_8x16:String = 'ui/clio/Ac437_CompaqThin_8x16';
@@ -22,10 +26,11 @@ class ClioTextMenuState extends MusicBeatState {
 				return [Paths.font(FONT_Ac437_CompaqThin_8x16),];
 
 			case 'SOUND':
-				function sfx(sound)
-					return Path.sound(sound).audio();
-
-				return [sfx(SOUND_CANCELMENU), sfx(SOUND_SCROLLMENU), sfx(SOUND_SELECTMENU),];
+				return [
+					Paths.file(SOUND_CANCELMENU, Constants.EXT_SOUND),
+					Paths.file(SOUND_SCROLLMENU, Constants.EXT_SOUND),
+					Paths.file(SOUND_SELECTMENU, Constants.EXT_SOUND),
+				];
 
 			default:
 		}
@@ -44,19 +49,28 @@ class ClioTextMenuState extends MusicBeatState {
 	public function create() {
 		super.create();
 
+		FlxG.cameras.reset(new FunkinCamera('menuCam'));
 		add(camFollow = new FlxObject(FlxG.width / 2, 0, 1, 1));
 		add(itemsTexts = new FlxSpriteContainer());
 
 		final tsize = 32;
+		var skip = 0;
 		for (i => item in items) {
+			if (item == null || item?.trim()?.length < 0) {
+				skip++;
+				continue;
+			}
+
 			var itemText = new FlxText(0, 20 + (i * (tsize * 2)), camera.width, item.toUpperCase(), tsize);
 			itemsTexts.add(itemText);
 
 			itemText.setFormat(Paths.font(FONT_Ac437_CompaqThin_8x16), tsize, 0xFFFFFFFF, 'center');
-			itemText.ID = i;
+			itemText.ID = i - skip;
 		}
 
-		resetCamStuff();
+		FlxG.camera.follow(camFollow, null, 0.04);
+		FlxG.camera.snapToTarget();
+
 		move(0);
 
 		#if FEATURE_DEBUG_MENU
@@ -64,19 +78,12 @@ class ClioTextMenuState extends MusicBeatState {
 		#end
 	}
 
-	function resetCamStuff(snap:Bool = true):Void {
-		FlxG.camera.follow(camFollow, null, 0.04);
-
-		if (snap)
-			FlxG.camera.snapToTarget();
-	}
-
 	function move(change = 0) {
 		selected += change;
 
 		if (selected < 0)
-			selected = items.length - 1;
-		if (selected > items.length - 1)
+			selected = itemsTexts.members.length - 1;
+		if (selected > itemsTexts.members.length - 1)
 			selected = 0;
 
 		FunkinSound.playOnce(Paths.sound(SOUND_SCROLLMENU).toFlxSoundAsset());
@@ -109,8 +116,8 @@ class ClioTextMenuState extends MusicBeatState {
 			selection();
 	}
 
-	function addItem(item:String, onSelect:Void->Void) {
-		items.push(item);
-		itemsOnSelect.push(onSelect);
+	function addItem(?item:String, ?onSelect:Void->Void) {
+		items.push(item ?? null);
+		itemsOnSelect.push(onSelect ?? null);
 	}
 }

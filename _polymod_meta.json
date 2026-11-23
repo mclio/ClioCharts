@@ -5,11 +5,18 @@
   "contributors": [
     {
       "name": "Clio",
-      "role": "Programmer & Charter"
+      "role": "Programmer & Charter",
+      "url": "https://github.com/mclio"
     },
     {
       "name": "laffinstalk",
-      "role": "Remixer"
+      "role": "Remixer",
+      "url": "https://github.com/requazar"
+    },
+    {
+      "name": "Flavor Foley",
+      "role": "WAYWARD ROMANCE (Ft. Feng Yi)",
+      "url": "https://flavorfoley.com/"
     }
   ],
   "api_version": "0.9.0",
